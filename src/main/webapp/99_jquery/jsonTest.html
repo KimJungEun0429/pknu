@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+	<script>
+	
+		var student1 = {
+			sid : "S001",
+			sname : "홍길동"
+		};
+		
+		
+		
+		var student2 = {
+			sid : "S002",
+			sname : "전우치"
+		};
+		
+		var students = [];
+		students[0] = {
+			sid : "S003",
+			sname : "갑돌이"
+		};
+		
+		students[1] = {
+				sid : "S004",
+				sname : "갑순이"
+		};
+		
+		var numbers = [];
+		numbers[0] = 1;
+		numbers[1] = 2;
+		
+		numbers = [1, 2];
+
+	
+		function test(){
+			
+			
+			document.getElementById("show").innerHTML = student1.sid;
+			
+		}
+	
+	</script>
+
+</head>
+<body>
+	<div id="show" style="font-size:40px;">
+	
+	
+	</div>
+	<div>
+	
+		<input type="button" value="확인" onclick="test();" />
+	
+	</div>
+</body>
+</html>
