@@ -45,6 +45,7 @@
      var isAdd = false;
      var menuList = null; //
      var rowCount = 0;    //
+     var selectedMenuID = [];
      
      $(document).ready(
     
@@ -109,6 +110,7 @@
 					
 					var programs = data["PROGRAMS"];
 					
+					
 					rowCount = programs.length;
 					
 					for(var i=0;i<programs.length;i++){
@@ -121,7 +123,7 @@
 						var purl = program["PURL"];
 						var pfilename = program["PFILENAME"];
 						
-						
+						selectedMenuID[i] = menuid;
 					
 						//콤보박스
 				 		var strHTML_Combo = createCombo(menuid);
@@ -130,10 +132,7 @@
 
 						*/
 						
-						
-
-						
-						
+					
 						strHTML += '<div id="lists' + i + '">';
 						strHTML += '<span style="width:5%">';
 						strHTML += '	<input type="checkbox" name="chk" id="" class="easyui-checkbox"/>';
@@ -168,7 +167,7 @@
  		
  		var strHTML_Combo = "";
  		
- 		strHTML_Combo += "<select name='pmenuid'>";
+ 		strHTML_Combo += "<select name='pmenuid' onchange='chkMenu(this, &quot;" + menuid + "&quot;)'>";
  		for(var menu of menuList){
  			
  			strHTML_Combo += "<option value='"+ menu["MENUID"] + "'";
@@ -181,6 +180,17 @@
  		strHTML_Combo += "</select>";
  		
  		return strHTML_Combo;
+ 		
+ 	}
+ 	
+ 	var chkMenu = function(objSelect, orgMenuid){
+ 		//alert(orgMenuid);
+ 		if(selectedMenuID.includes(objSelect.value)){
+ 			alert("야 씨 정은아 코딩죠!!!");
+ 			objSelect.value = orgMenuid;
+ 			
+ 			//AJAX날려가지고 저장해버리겠습니다.
+ 		}
  		
  	}
  	
@@ -223,6 +233,37 @@
 </head>
 <body>
 	<div id="wrap">
+	
+	<table border="1" width="100%" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="100%" height="70px" align="center">
+				<!-- 메뉴구성 테이블 시작 -->
+				<table border="1" width="80%" align="center" cellpadding="0" cellspacing="0">
+					
+					<tr>
+						<td width="16%" height="40" align="center" class="selectedMenu">
+							<a href="/ServBoard/Admin_AuthList"><span>권한관리</span></a>
+						</td>
+						<td width="16%" height="40" align="center">
+							<a href="/ServBoard/Admin_MemList"><span>회원관리</span></a>
+						</td>
+						<td width="16%" height="40" align="center">
+							<a href="/ServBoard/Admin_MenuList"><span>메뉴관리</span></a>
+						</td>
+						<td width="16%" height="40" align="center">
+							<span>프로그램관리</span>
+						</td>
+						<td width="16%" height="40" align="center">
+							<span>권한별상세관리</span>
+						</td>
+					</tr>
+				</table>
+				<!-- 메뉴구성 테이블 끝 -->
+			</td>
+		</tr>
+	</table>	
+	
+	
 	
 		<div id="search">
 			<input type="text" name="" id="" class="txt"/>

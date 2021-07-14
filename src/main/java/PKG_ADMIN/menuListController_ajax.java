@@ -44,7 +44,7 @@ public class menuListController_ajax extends HttpServlet
 			
 			ResultSet rs = (ResultSet)csmt.getObject(1);  //MAINMENULIST
 			
-			/*
+			
 			String strXML = "";
 			strXML += "<?xml version='1.0'?>";
 			strXML += "<menus>";
@@ -59,9 +59,9 @@ public class menuListController_ajax extends HttpServlet
 			strXML += "</menus>";
 			
 			response.setContentType("text/xml");
-		  */
+		  
 			
-			
+		  /*
 			JSONObject Menus = new JSONObject();
 			JSONArray MenuArr = new JSONArray();
 			
@@ -78,13 +78,13 @@ public class menuListController_ajax extends HttpServlet
 			Menus.put("MENUS", MenuArr);
 			
 			response.setContentType("application/json");
-			
+			*/
 			
 			
 			
 		    PrintWriter writer = response.getWriter();
 		    //writer.print(strXML);
-		    writer.print(Menus.toJSONString());
+		    writer.print(strXML);
 
 			
 		} catch (ClassNotFoundException e) {

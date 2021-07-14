@@ -41,7 +41,9 @@ public class menuListController_Combo extends HttpServlet
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "mngauth", "1");
 			
-			String strProcName = "{call PKG_AD_MENUS.PROC_MENUS_SEL(?)}";
+			//String strProcName = "{call PKG_AD_MENUS.PROC_MENUS_SEL(?)}";
+			String strProcName = "{call PKG_AD_PROGRAM.PROC_MENU_COMBOLIST(?)}";
+			
 			CallableStatement csmt = con.prepareCall(strProcName);
 			csmt.registerOutParameter(1, OracleTypes.CURSOR);
 			

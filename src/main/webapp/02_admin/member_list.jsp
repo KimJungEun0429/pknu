@@ -203,7 +203,7 @@
 							<a href="/ServBoard/Admin_MenuList"><span>메뉴관리</span></a>
 						</td>
 						<td width="16%" height="40" align="center">
-							<span>프로그램관리</span>
+							<a href="/ServBoard/02_admin/program_list.jsp"><span>프로그램관리</span></a>
 						</td>
 						<td width="16%" height="40" align="center">
 							<span>권한별상세관리</span>
