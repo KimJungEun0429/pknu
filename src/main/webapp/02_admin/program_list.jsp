@@ -82,6 +82,7 @@
  		
  		
  		//콤보박스
+ 		/*
  		var strHTML_Combo = "";
  		
  		strHTML_Combo += "<select name=''>";
@@ -91,7 +92,7 @@
  			
  		}
  		strHTML_Combo += "</select>";
- 		
+ 		*/
  		
 		//var student = "{id:'aaa',name:'홍길동'}";
 		//json.parse(); //string(text) json을 json object 형태로 변환
@@ -126,7 +127,7 @@
 						selectedMenuID[i] = menuid;
 					
 						//콤보박스
-				 		var strHTML_Combo = createCombo(menuid);
+				 		var strHTML_Combo = createCombo(menuid, i);
 				 		
 						/* 
 
@@ -163,12 +164,14 @@
 		
 	}
      
- 	var createCombo = function(menuid){
+ 	var createCombo = function(menuid, i){
  		
  		var strHTML_Combo = "";
  		
- 		strHTML_Combo += "<select name='pmenuid' onchange='chkMenu(this, &quot;" + menuid + "&quot;)'>";
- 		for(var menu of menuList){
+ 		
+ 		strHTML_Combo += "<select name='pmenuid' onchange='chkMenu(" + i + ",this, &quot;" + menuid + "&quot;)'>";
+ 		strHTML_Combo += "<option value=''>선택해주세요</option>";
+ 		for(var menu of menuList){ 
  			
  			strHTML_Combo += "<option value='"+ menu["MENUID"] + "'";
  			if(menuid == menu["MENUID"]){
@@ -183,20 +186,27 @@
  		
  	}
  	
- 	var chkMenu = function(objSelect, orgMenuid){
+ 	var chkMenu = function(i, objSelect, orgMenuid){
+ 		//alert(i);
  		//alert(orgMenuid);
  		if(selectedMenuID.includes(objSelect.value)){
- 			alert("야 씨 정은아 코딩죠!!!");
+ 			alert("야 씨 정은아 코딩죠!!! - 소희가 줄거야");
  			objSelect.value = orgMenuid;
  			
  			//AJAX날려가지고 저장해버리겠습니다.
  		}
+ 		else{
+ 			selectedMenuID[i] = objSelect.value;
+  		}
+ 		
  		
  	}
  	
     var addRow = function(){
     	
-    	var strHTML_Combo = createCombo("");
+    	var cnt = selectedMenuID.length;
+    	
+    	var strHTML_Combo = createCombo("", cnt);
     	
     	var strHTML = "";
     	strHTML += '<div id="lists' + rowCount + '">';
