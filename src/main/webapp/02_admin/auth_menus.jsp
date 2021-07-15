@@ -75,7 +75,106 @@
 	}
 	
 	var setTopMenuList = function(selectedAuthID){
-		alert(selectedAuthID);
+		//alert(selectedAuthID);
+		
+		var strHTML = "";
+		
+		var ajaxObj = {
+				
+				type:"post", 
+				async:"true", 
+				url:"/ServBoard/Admin_AuthTopMenuList", 
+				data:"selectedAuthID=" + selectedAuthID, 
+				dataType:"json",  
+				success: function(data){
+					
+					strHTML += "<table border='1' width='90%' align='center'>";
+					strHTML += "<tr>";
+					strHTML += "	<td width='20%' height='30px' align='center'>메뉴아이디</td>";
+					strHTML += "	<td width='30%' height='30px' align='center'>메뉴이름</td>";
+					strHTML += "	<td width='12%' height='30px' align='center'>메뉴레벨</td>";
+					strHTML += "	<td width='8%' height='30px' align='center'>조회</td>";
+					strHTML += "	<td width='8%' height='30px' align='center'>수정</td>";
+					strHTML += "	<td width='8%' height='30px' align='center'>추가</td>";
+					strHTML += "	<td width='8%' height='30px' align='center'>삭제</td>";
+					strHTML += "</tr>";
+					
+					
+						var topMenus = data["MENUS"];
+						for(var topMenu of topMenus){
+							
+							var topMenuID = topMenu["MENUID"];
+							var topMenuName = topMenu["MENUNAME"];
+							var topMenuLvl = topMenu["MENULVL"];
+							var authSel = topMenu["AUTH_SEL"];
+							var authUp = topMenu["AUTH_UP"];
+							var authIns = topMenu["AUTH_INS"];
+							var authDel = topMenu["AUTH_DEL"];
+							
+							strHTML += "<tr>";
+							strHTML += "	<td width='20%' height='30px' align='center'>";
+							strHTML += topMenuID;
+							strHTML += "	</td>";
+							strHTML += "	<td width='38%' height='30px' align='center'>";
+							strHTML += topMenuName;
+							strHTML += "	</td>";
+							strHTML += "	<td width='10%' height='30px' align='center'>";
+							strHTML += topMenuLvl;
+							strHTML += "	</td>";
+							strHTML += "	<td width='8%' height='30px' align='center'>";
+							strHTML += "<input type='checkbox' id='" + topMenuID + "Sel' onclick='chkSelClick(&quot;" + topMenuID + "&quot;, &quot;Sel&quot;)'";
+							if(authSel == "Y") {strHTML += "checked";}
+							strHTML += " />";
+							strHTML += "	</td>";
+							strHTML += "	<td width='8%' height='30px' align='center'>";
+							strHTML += "<input type='checkbox' id='" + topMenuID + "Up' ";
+							if(authUp == "Y") {strHTML += "checked";}
+							strHTML += " />";
+							strHTML += "	</td>";
+							strHTML += "	<td width='8%' height='30px' align='center'>";
+							strHTML += "<input type='checkbox' id='" + topMenuID + "Add' ";
+							if(authIns == "Y") {strHTML += "checked";}
+							strHTML += " />";
+							strHTML += "	</td>";
+							strHTML += "	<td width='8%' height='30px' align='center'>";
+							strHTML += "<input type='checkbox' id='" + topMenuID + "Del' ";
+							if(authDel == "Y") {strHTML += "checked";}
+							strHTML += " />";
+							strHTML += "	</td>";
+							strHTML += "</tr>";
+							
+						}
+						
+										
+					strHTML += "</table>";
+					
+					$("#topMenuList").html(strHTML);
+					
+				},
+		  		error : function(xhr,status,error) {
+		      		alert("err")
+		  		},
+		  		complete:function(data,textStatus) {
+		  			
+		  		}
+	
+			  }
+		
+		$.ajax(ajaxObj);
+		
+		
+	}		
+		
+	
+	var chkSelClick = function(selectedAuthID, colName){
+		
+		var selectedChkID = selectedAuthID + colName;
+		
+		if(!$("#" + selectedChkID).prop("checked")){
+			
+			$( "input[id*='" + selectedAuthID + "']" ).prop("checked", false);
+		}
+		
 	}
 
 
@@ -123,7 +222,9 @@
 							<!-- 권한리스트 가져오자 -->
 						</td>
 						<td width="80%" height="200px" align="center">
-						
+							<!-- TopMenuList 시작 -->
+							<div id="topMenuList"></div>
+							<!-- TopMenuList 끝 -->
 						</td>
 					</tr>
 					<tr>
