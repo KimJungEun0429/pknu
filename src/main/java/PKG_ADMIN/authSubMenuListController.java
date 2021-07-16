@@ -66,6 +66,8 @@ public class authSubMenuListController extends HttpServlet
 				menu.put("AUTH_INS", rs.getString("AUTH_INS"));
 				menu.put("AUTH_UP", rs.getString("AUTH_UP"));
 				menu.put("AUTH_DEL", rs.getString("AUTH_DEL"));
+				menu.put("ROOTID", rs.getString("ROOTID"));
+				menu.put("PARENTID", rs.getString("PARENTID"));
 
 				menuArr.add(menu);
 			}

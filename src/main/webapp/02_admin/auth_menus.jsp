@@ -112,33 +112,33 @@
 							var authDel = topMenu["AUTH_DEL"];
 							
 							
-							strHTML += "<tr onclick='setSubMenusList(&quot;" + selectedAuthID + "&quot;,&quot;" + topMenuID + "&quot;)'>";
-							strHTML += "	<td width='20%' height='30px' align='center'>";
+							strHTML += "<tr >";
+							strHTML += "	<td width='20%' height='30px' align='center' onclick='setSubMenusList(&quot;" + selectedAuthID + "&quot;,&quot;" + topMenuID + "&quot;)'>";
 							strHTML += topMenuID;
 							strHTML += "	</td>";
-							strHTML += "	<td width='38%' height='30px' >";
+							strHTML += "	<td width='38%' height='30px' onclick='setSubMenusList(&quot;" + selectedAuthID + "&quot;,&quot;" + topMenuID + "&quot;)'>";
 							strHTML += topMenuName;
 							strHTML += "	</td>";
-							strHTML += "	<td width='10%' height='30px' align='center'>";
+							strHTML += "	<td width='10%' height='30px' align='center' onclick='setSubMenusList(&quot;" + selectedAuthID + "&quot;,&quot;" + topMenuID + "&quot;)'>";
 							strHTML += topMenuLvl;
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + topMenuID + "Sel' onclick='chkSelClick(&quot;" + topMenuID + "&quot;, &quot;Sel&quot;)'";
+							strHTML += "<input type='checkbox' id='top" + topMenuID + "Sel' onclick='chkSelClick(&quot;" + topMenuID + "&quot;, &quot;Sel&quot;, &quot;top&quot;)'";
 							if(authSel == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + topMenuID + "Up' ";
+							strHTML += "<input type='checkbox' id='top" + topMenuID + "Up' ";
 							if(authUp == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + topMenuID + "Add' ";
+							strHTML += "<input type='checkbox' id='top" + topMenuID + "Add' ";
 							if(authIns == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + topMenuID + "Del' ";
+							strHTML += "<input type='checkbox' id='top" + topMenuID + "Del' ";
 							if(authDel == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
@@ -167,13 +167,36 @@
 	}		
 		
 	
-	var chkSelClick = function(selectedAuthID, colName){
+	var chkSelClick = function(selectedMenuID, colName, gbn){
 		
-		var selectedChkID = selectedAuthID + colName;
+		var selectedChkID = gbn + selectedMenuID + colName;
 		
 		if(!$("#" + selectedChkID).prop("checked")){
 			
-			$( "input[id*='" + selectedAuthID + "']" ).prop("checked", false);
+			$( "input[id*='" + gbn + selectedMenuID + "']" ).prop("checked", false);
+			
+			var selectedSubMenuID = selectedMenuID + "Sel";
+			var subChks = $( "input[id*='" + selectedSubMenuID + "']" );
+			//alert(subChks.length);
+			
+			for(var subChk of subChks){
+				subChk.click();
+				
+			}
+			
+			$("#" + selectedChkID).prop("checked", false);
+		}
+		else{
+			
+			var selectedSubMenuID = selectedMenuID + "Sel";
+			var subChks = $( "input[id*='" + selectedSubMenuID + "']" );
+			//alert(subChks.length);
+			
+			for(var subChk of subChks){
+				subChk.checked = true;
+				
+			}
+			
 		}
 		
 	}
@@ -217,6 +240,8 @@
 							var authUp = subMenu["AUTH_UP"];
 							var authIns = subMenu["AUTH_INS"];
 							var authDel = subMenu["AUTH_DEL"];
+							var rootID = subMenu["ROOTID"];
+							var parentID = subMenu["PARENTID"];
 							
 							
 							strHTML += "<tr onclick=''>";
@@ -230,22 +255,22 @@
 							strHTML += subMenuLvl;
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + subMenuID + "Sel' onclick='chkSelClick(&quot;" + subMenuID + "&quot;, &quot;Sel&quot;)'";
+							strHTML += "<input type='checkbox' id='sub" + subMenuID + rootID + "Sel' onclick='chkSelClick(&quot;" + subMenuID + "&quot;, &quot;Sel&quot;, &quot;sub&quot;)'";
 							if(authSel == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + subMenuID + "Up' ";
+							strHTML += "<input type='checkbox' id='sub" + subMenuID + rootID + "Up' ";
 							if(authUp == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + subMenuID + "Add' ";
+							strHTML += "<input type='checkbox' id='sub" + subMenuID + rootID + "Add' ";
 							if(authIns == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
 							strHTML += "	<td width='8%' height='30px' align='center'>";
-							strHTML += "<input type='checkbox' id='" + subMenuID + "Del' ";
+							strHTML += "<input type='checkbox' id='sub" + subMenuID + rootID + "Del' ";
 							if(authDel == "Y") {strHTML += "checked";}
 							strHTML += " />";
 							strHTML += "	</td>";
